@@ -5,28 +5,18 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
+  push_to_target:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
+    - name: Checkout source repository
       uses: actions/checkout@v2
-
-    - name: Create artifact
-      uses: actions/upload-artifact@v2
       with:
-        name: source-code
-        path: .
+        fetch-depth: 0 # This is important to fetch all branches and tags
 
-    - name: Push artifact to another repository
+    - name: Push to target repository
+      env:
+        API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN_Abuyin2004 }}
       run: |
-        git clone https://${{ secrets.GITHUB_TOKEN_Abuyin2004 }}@github.com/Abuyin2004/apple_tobacco.git target-repo
-        cd target-repo
-        git checkout master
-        git fetch
-        git reset --hard origin/master
-        rm -rf *
-        mv ../source-code/* .
-        git add .
-        git commit -m "Update from source repository"
-        git push origin master --force
+        git remote add target https://${{ secrets.GITHUB_TOKEN_Abuyin2004 }}@github.com/Abuyin2004/apple_tobacco.git
+        git push target master --force
