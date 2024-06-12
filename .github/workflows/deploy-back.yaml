@@ -15,8 +15,6 @@ jobs:
         fetch-depth: 0 # This is important to fetch all branches and tags
 
     - name: Push to target repository
-      env:
-        API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN_Abuyin2004 }}
       run: |
-        git remote set-url origin https://$API_TOKEN_GITHUB@github.com/Abuyin2004/apple_tobacco.git
+        git remote set-url origin https://${{ secrets.GITHUB_TOKEN_Abuyin2004 }}@github.com/Abuyin2004/apple_tobacco.git
         git push origin master --force
