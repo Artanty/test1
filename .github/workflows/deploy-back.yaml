@@ -12,8 +12,8 @@ jobs:
     - name: Checkout source repository
       uses: actions/checkout@v2
       with:
-        fetch-depth: 0
-        
+        fetch-depth: 0 # This is important to fetch all branches and tags
+
     - name: Push to target repository
       uses: ad-m/github-push-action@master
       with:
