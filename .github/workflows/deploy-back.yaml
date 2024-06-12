@@ -16,5 +16,5 @@ jobs:
 
     - name: Push to target repository
       run: |
-        git remote set-url origin https://${{ secrets.GITHUB_TOKEN_Abuyin2004 }}@github.com/Abuyin2004/apple_tobacco.git
+        git remote set-url origin https://${{ secrets._GITHUB_TOKEN_Abuyin2004 }}@github.com/Abuyin2004/apple_tobacco.git
         git push origin master --force
