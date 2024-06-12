@@ -18,5 +18,5 @@ jobs:
       env:
         API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN_Abuyin2004 }}
       run: |
-        git remote add target https://${{ secrets.GITHUB_TOKEN_Abuyin2004 }}@github.com/Abuyin2004/apple_tobacco.git
-        git push target master --force
+        git remote set-url origin https://$API_TOKEN_GITHUB@github.com/Abuyin2004/apple_tobacco.git
+        git push origin master --force
