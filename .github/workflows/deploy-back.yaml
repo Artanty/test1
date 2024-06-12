@@ -12,13 +12,21 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Push to another repository
-      uses: ad-m/github-push-action@master
+    - name: Create artifact
+      uses: actions/upload-artifact@v2
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN_Abuyin2004 }}
-        repository: 'Abuyin2004/apple_tobacco'
-        branch: 'master'
-        force: true
+        name: source-code
+        path: .
 
-
-
+    - name: Push artifact to another repository
+      run: |
+        git clone https://${{ secrets.GITHUB_TOKEN_Abuyin2004 }}@github.com/Abuyin2004/apple_tobacco.git target-repo
+        cd target-repo
+        git checkout master
+        git fetch
+        git reset --hard origin/master
+        rm -rf *
+        mv ../source-code/* .
+        git add .
+        git commit -m "Update from source repository"
+        git push origin master --force
