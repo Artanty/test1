@@ -21,3 +21,4 @@ jobs:
         repository: 'Abuyin2004/apple_tobacco'
         branch: 'master'
         force: true
+        directory: '.' # This is the directory containing the files to push
