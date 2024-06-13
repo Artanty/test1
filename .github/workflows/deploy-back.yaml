@@ -18,7 +18,7 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets._GITHUB_TOKEN_Abuyin2004 }}
         with:
-          source-directory: '/'
+          source-directory: 'output'
           destination-github-username: 'Abuyin2004'
           destination-repository-name: 'apple_tobacco'
           user-email: carles3@pina.cat
