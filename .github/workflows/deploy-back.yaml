@@ -11,14 +11,6 @@ jobs:
     steps:
     - name: Checkout source repository
       uses: actions/checkout@v2
-      with:
-        fetch-depth: 0 # This is important to fetch all branches and tags
-
-    - name: Push to target repository
-      uses: ad-m/github-push-action@master
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN_Abuyin2004 }}
-        repository: 'Abuyin2004/apple_tobacco'
-        branch: 'master'
-        force: true
-        directory: '.' # This is the directory containing the files to push
+      run: |
+        git remote add other-account https://github.com/Abuyin2004/apple_tobacco.git 
+        git push other-account master
