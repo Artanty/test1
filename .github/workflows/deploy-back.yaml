@@ -11,6 +11,7 @@ jobs:
     steps:
     - name: Checkout source repository
       uses: actions/checkout@v2
+    - name: push
       run: |
         git remote add other-account https://github.com/Abuyin2004/apple_tobacco.git 
         git push other-account master
