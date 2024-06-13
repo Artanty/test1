@@ -5,17 +5,23 @@ on:
     branches: [ master ]
 
 jobs:
-  push_to_target:
+  build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-
+    container: pandoc/latex    # "ubuntu" is a more generic container
+                               # using "pandoc/latex" because of dependencies
+                               # used in the specific "build.sh"
     steps:
-    - name: Checkout source repository
-      uses: actions/checkout@v2
-      persist-credentials: false # otherwise, the token used is the GITHUB_TOKEN, instead of your personal access token.
-      fetch-depth: 0 # otherwise, there would be errors pushing refs to the destination repository.
-    - name: push
-      run: |
-        git remote add other-account https://github.com/Abuyin2004/apple_tobacco.git 
-        git push other-account master
+      - uses: actions/checkout@v2
+      - name: creates output
+        run:  sh ./build.sh # some command from your repository that creates
+                            # output to "source-directory" ("output" in the example)
+      - name: Pushes to another repository
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.GITHUB_TOKEN_Abuyin2004 }}
+        with:
+          source-directory: 'output'
+          destination-github-username: 'Abuyin2004'
+          destination-repository-name: 'apple_tobacco'
+          user-email: carles3@pina.cat
+          target-branch: master
